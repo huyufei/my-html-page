@@ -1,0 +1,733 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>苦尽柑来遇见你 - 韩国爱情年代剧</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #E38B29;
+            --secondary: #3A6B73;
+            --accent: #F1A661;
+            --light-bg: #FDF6EC;
+            --dark-bg: #1D2B2E;
+            --text-light: #333333;
+            --text-dark: #F5F5F5;
+            --quote-light: #3A6B73;
+            --quote-dark: #F1A661;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: "Noto Sans SC", Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .light {
+            background-color: var(--light-bg);
+            color: var(--text-light);
+        }
+
+        .dark {
+            background-color: var(--dark-bg);
+            color: var(--text-dark);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Noto Serif SC", serif;
+            font-weight: 700;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+        }
+
+        /* Drop Cap */
+        .drop-cap::first-letter {
+            font-family: "Noto Serif SC", serif;
+            float: left;
+            font-size: 4rem;
+            line-height: 1;
+            font-weight: 700;
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+
+        /* Timeline */
+        .timeline-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--accent);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 4px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            background: var(--primary);
+            border: 4px solid var(--accent);
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .right::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .light .timeline-content {
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .timeline-content {
+            background-color: #2A3B3F;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Character Cards */
+        .character-card {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .light .character-card {
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .dark .character-card {
+            background-color: #2A3B3F;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Quote Styling */
+        blockquote {
+            font-family: "Noto Serif SC", serif;
+            position: relative;
+            padding: 2rem 3rem;
+            margin: 2rem 0;
+            border-radius: 0.5rem;
+        }
+
+        .light blockquote {
+            background-color: rgba(58, 107, 115, 0.1);
+            border-left: 4px solid var(--quote-light);
+            color: var(--quote-light);
+        }
+
+        .dark blockquote {
+            background-color: rgba(241, 166, 97, 0.1);
+            border-left: 4px solid var(--quote-dark);
+            color: var(--quote-dark);
+        }
+
+        blockquote::before {
+            content: "";
+            font-family: "Noto Serif SC", serif;
+            font-size: 4rem;
+            position: absolute;
+            left: 0.5rem;
+            top: -1rem;
+            opacity: 0.2;
+        }
+
+        /* Theme Toggle Button */
+        #theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .light #theme-toggle {
+            background-color: var(--secondary);
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark #theme-toggle {
+            background-color: var(--accent);
+            color: var(--dark-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #theme-toggle:hover {
+            transform: rotate(15deg);
+        }
+
+        /* Rating Stars */
+        .star-rating {
+            color: #FDCC0D;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .timeline-container::after {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 50px;
+                padding-right: 10px;
+            }
+            
+            .timeline-item::after {
+                left: 10px;
+                top: 15px;
+            }
+            
+            .right {
+                left: 0;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .animation-delay-100 { animation-delay: 0.1s; }
+        .animation-delay-200 { animation-delay: 0.2s; }
+        .animation-delay-300 { animation-delay: 0.3s; }
+        .animation-delay-400 { animation-delay: 0.4s; }
+        .animation-delay-500 { animation-delay: 0.5s; }
+
+        /* Diagram styling */
+        .mermaid {
+            background-color: transparent !important;
+        }
+
+        .light .mermaid text {
+            fill: var(--text-light) !important;
+        }
+
+        .dark .mermaid text {
+            fill: var(--text-dark) !important;
+        }
+    </style>
+</head>
+<body class="light">
+    <!-- Theme Toggle Button -->
+    <div id="theme-toggle" title="切换深色/浅色模式">
+        <i class="fas fa-moon text-xl"></i>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero h-screen flex flex-col justify-center items-center text-white relative">
+        <div style="background-image: url('https://m.media-amazon.com/images/M/MV5BMTI1MTliYTUtYzUyMy00Y2UyLTkyNmYtNDUzZDQ4NTE5YTA1XkEyXkFqcGdeQXVyNTU0OTYzMDQ@._V1_.jpg'); filter: blur(2px); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: -1;"></div>
+        <div class="absolute inset-0 bg-black opacity-60"></div>
+        <div class="container mx-auto px-4 z-10 animate-fadeInUp">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">苦尽柑来遇见你</h1>
+                <p class="text-xl md:text-2xl mb-6 font-light max-w-3xl mx-auto">一段横跨三代女性的爱情与成长故事，展现韩国济州岛1950-60年代的历史风貌</p>
+                <div class="flex justify-center gap-4 mt-8">
+                    <div class="bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-lg">
+                        <i class="fas fa-tv mr-2"></i> Netflix
+                    </div>
+                    <div class="bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-lg">
+                        <i class="fas fa-calendar-alt mr-2"></i> 2025.03.07
+                    </div>
+                    <div class="bg-white bg-opacity-20 backdrop-blur-sm px-4 py-2 rounded-lg">
+                        <i class="fas fa-film mr-2"></i> 16集
+                    </div>
+                </div>
+                <div class="mt-12">
+                    <a href="#overview" class="text-white animate-bounce inline-block">
+                        <i class="fas fa-chevron-down text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-16">
+        <!-- Overview Section -->
+        <section id="overview" class="mb-20 opacity-0 animate-fadeInUp">
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-2/3">
+                    <h2 class="text-4xl font-bold mb-8 border-b-2 border-primary pb-2 inline-block">剧情简介</h2>
+                    <p class="text-lg leading-relaxed mb-6 drop-cap">故事以1950-1960年代的济州岛为背景，讲述了叛逆勇敢的吴爱纯（李知恩饰）与坚定不移的梁宽植（朴宝剑饰）的爱情故事。吴爱纯是海女的女儿，家庭贫困且遭遇诸多不幸，母亲早逝，被寄养在叔叔家受尽委屈，梦想成为诗人却因现实无奈放弃。</p>
+                    <p class="text-lg leading-relaxed mb-6">梁宽植作为她的青梅竹马，一直默默守护着她，两人历经波折，从青涩初恋到携手走进婚姻，共同面对生活的苦难，如贫困、婆媳矛盾、丧子之痛等。</p>
+                    <p class="text-lg leading-relaxed">同时，剧中通过三代女性的命运交织，展现了女性在父权社会下的挣扎与觉醒。爱纯的母亲一生为海女，辛苦劳作却早早离世；爱纯努力让女儿金明走出济州岛，接受教育，金明最终成为职场女性，拒绝不对等的婚姻，实现了自我价值。</p>
+                </div>
+                <div class="md:w-1/3">
+                    <div class="rounded-xl overflow-hidden shadow-lg">
+                        <img src="https://img3.doubanio.com/view/photo/l/public/p2919277402.webp" alt="剧照" class="w-full h-auto">
+                        <div class="p-4 light:bg-white dark:bg-gray-800">
+                            <div class="flex items-center mb-3">
+                                <div class="star-rating mr-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="font-bold">9.6</span>
+                                <span class="ml-2 text-sm text-gray-500">(豆瓣评分)</span>
+                            </div>
+                            <p class="text-sm italic">"今年最不可错过的韩剧"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cast & Crew Section -->
+        <section class="mb-20 opacity-0 animate-fadeInUp animation-delay-100">
+            <h2 class="text-4xl font-bold mb-8 border-b-2 border-primary pb-2 inline-block">演职人员</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                <!-- Director & Writer -->
+                <div class="character-card">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">导演</h3>
+                        <p class="text-lg font-medium">金元锡</p>
+                        <div class="mt-4 text-sm">
+                            <p class="mb-1"><i class="fas fa-award text-yellow-500 mr-2"></i>代表作《请回答1988》</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="character-card">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">编剧</h3>
+                        <p class="text-lg font-medium">林尚春</p>
+                        <div class="mt-4 text-sm">
+                            <p class="mb-1"><i class="fas fa-pen-fancy text-indigo-500 mr-2"></i>代表作《机智的医生生活》</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-bold mb-6">主演阵容</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Character Cards -->
+                <div class="character-card">
+                    <img src="https://img2.doubanio.com/view/photo/l/public/p2918130421.webp" alt="李知恩" class="w-full h-64 object-cover object-top">
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg">李知恩 (IU)</h4>
+                        <p class="text-sm mb-2">饰 吴爱纯</p>
+                        <p class="text-sm">海女之女，渴望摆脱命运的桎梏，追求自由与诗意的生活</p>
+                    </div>
+                </div>
+                
+                <div class="character-card">
+                    <img src="https://img3.doubanio.com/view/photo/l/public/p2919198252.webp" alt="朴宝剑" class="w-full h-64 object-cover object-top">
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg">朴宝剑</h4>
+                        <p class="text-sm mb-2">饰 梁宽植</p>
+                        <p class="text-sm">爱纯的青梅竹马，温柔坚定，始终不渝地守护着她</p>
+                    </div>
+                </div>
+                
+                <div class="character-card">
+                    <img src="https://img1.doubanio.com/view/photo/l/public/p2918628648.webp" alt="文素利" class="w-full h-64 object-cover object-top">
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg">廉惠兰</h4>
+                        <p class="text-sm mb-2">饰 吴母</p>
+                        <p class="text-sm">一生为海女的坚强母亲，辛苦劳作只为给女儿更好的生活</p>
+                    </div>
+                </div>
+                
+                <div class="character-card">
+                    <img src="https://img3.doubanio.com/view/photo/l/public/p2607020463.webp" alt="朴海俊" class="w-full h-64 object-cover object-top">
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg">郑海钧</h4>
+                        <p class="text-sm mb-2">饰 吴叔</p>
+                        <p class="text-sm">爱纯的叔叔，待人刻薄，对爱纯百般刁难</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Theme Exploration -->
+        <section class="mb-20 opacity-0 animate-fadeInUp animation-delay-200">
+            <h2 class="text-4xl font-bold mb-8 border-b-2 border-primary pb-2 inline-block">主题探讨</h2>
+            
+            <blockquote class="mb-10">
+                "人生如济州岛的海浪，有时汹涌，有时平静。而爱，是在风浪中始终不变的灯塔。"
+            </blockquote>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4"><i class="fas fa-heart text-red-500 mr-2"></i>爱情与成长</h3>
+                    <p class="mb-4">该剧通过吴爱纯与梁宽植的爱情故事，展现了爱情如何在逆境中成长、坚韧不拔的品质如何帮助人们度过生活的难关。从青涩的初恋到共同面对生活的苦难，两人的感情也在不断历练中变得更加深厚。</p>
+                    <p>梁宽植的默默支持与守护，代表着爱情中的奉献与忠诚，而吴爱纯则通过自身成长，学会接受爱并回馈爱。</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4"><i class="fas fa-venus text-pink-500 mr-2"></i>女性主义视角</h3>
+                    <p class="mb-4">剧中通过三代女性的命运变迁，展现了韩国女性地位的历史演变：从完全服从于父权社会的第一代，到开始有自我意识但仍受限于传统的第二代，再到能够独立自主、追求平等的第三代。</p>
+                    <p>金明作为新时代女性的代表，她的选择预示着女性意识的觉醒与社会进步的必然趋势。</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4"><i class="fas fa-home text-green-500 mr-2"></i>家庭与责任</h3>
+                    <p class="mb-4">家庭作为韩国社会的基本单位，在剧中占据重要位置。剧集探讨了各种家庭关系：母女之情、婆媳矛盾、夫妻相处之道等。</p>
+                    <p>爱纯面对丧子之痛时的坚强，以及为女儿争取教育机会的决心，体现了母亲的责任与爱；而在婆媳关系中的成长，则显示了家庭和谐需要相互理解与包容。</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4"><i class="fas fa-map-marked-alt text-blue-500 mr-2"></i>历史与地域特色</h3>
+                    <p class="mb-4">以济州岛为背景，剧集呈现了丰富的地域文化特色，包括海女文化、当地方言、民间习俗等。同时，1950-60年代的历史背景也为故事提供了特定的社会环境。</p>
+                    <p>这一时期韩国社会正处于战后重建与现代化初期，传统与变革的冲突，为人物的命运提供了更深层次的社会背景。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section class="mb-20 opacity-0 animate-fadeInUp animation-delay-300">
+            <h2 class="text-4xl font-bold mb-8 border-b-2 border-primary pb-2 inline-block">三代女性的命运变迁</h2>
+            
+            <div class="timeline-container my-12">
+                <!-- Timeline items -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold mb-2">第一代：吴母 (1930s-1950s)</h3>
+                        <p class="mb-2"><i class="fas fa-quote-left text-sm opacity-50 mr-1"></i>海女的一生<i class="fas fa-quote-right text-sm opacity-50 ml-1"></i></p>
+                        <p>一生为海女，在父权社会中无发言权，通过辛苦劳作支撑家庭，早早离世，代表了传统韩国女性的命运。</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold mb-2">第二代：吴爱纯 (1950s-1970s)</h3>
+                        <p class="mb-2"><i class="fas fa-quote-left text-sm opacity-50 mr-1"></i>挣扎与觉醒<i class="fas fa-quote-right text-sm opacity-50 ml-1"></i></p>
+                        <p>梦想成为诗人却被现实阻碍，在传统与现代之间挣扎，努力为女儿创造更多可能性，代表了过渡期的韩国女性。</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3 class="text-xl font-bold mb-2">第三代：金明 (1970s-1990s)</h3>
+                        <p class="mb-2"><i class="fas fa-quote-left text-sm opacity-50 mr-1"></i>自主与独立<i class="fas fa-quote-right text-sm opacity-50 ml-1"></i></p>
+                        <p>接受高等教育，成为职场女性，敢于拒绝不平等的婚姻，追求自我价值实现，代表了新时代韩国女性的自主意识。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Production Features Section -->
+        <section class="mb-20 opacity-0 animate-fadeInUp animation-delay-400">
+            <h2 class="text-4xl font-bold mb-8 border-b-2 border-primary pb-2 inline-block">制作特点</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div>
+                    <img src="https://img3.doubanio.com/view/photo/l/public/p2919858083.webp" alt="济州岛风景" class="w-full h-auto rounded-lg shadow-lg mb-4">
+                    <h3 class="text-2xl font-bold mb-4">画面与音乐</h3>
+                    <p>剧中画面极具诗意，完美呈现了济州岛的油菜花田、海岸线等自然美景，营造出浓厚的时代氛围。摄影师采用大量长镜头和慢镜头，将济州岛的自然之美与人物情感融为一体。</p>
+                    <p class="mt-2">音乐部分，配乐大师柳思诚亲自操刀，融合传统韩国乐器与现代编曲，情感高潮处的配乐将观众情绪推向极致。</p>
+                </div>
+                
+                <div>
+                    <img src="https://img9.doubanio.com/view/photo/l/public/p2919277384.webp" alt="剧中服装" class="w-full h-auto rounded-lg shadow-lg mb-4">
+                    <h3 class="text-2xl font-bold mb-4">服化道与时代还原</h3>
+                    <p>剧组的服化道设计精致，完美还原了1960年代的风貌。服装设计师金秀贤深入研究济州岛传统服饰，特别是海女的工作服与日常装扮，力求精确还原历史细节。</p>
+                    <p class="mt-2">场景设计方面，制作组在济州岛实地取景，并根据历史资料重建了当时的村落、市场和家居环境，增强了观众的代入感。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Thematic Diagram -->
+        <section class="mb-20 opacity-0 animate-fadeInUp animation-delay-500">
+            <h2 class="text-4xl font-bold mb-8 border-b-2 border-primary pb-2 inline-block">剧集主题结构</h2>
+            
+            <div class="mermaid-container p-4 rounded-lg">
+                <pre class="mermaid">
+flowchart TD
+    A["《苦尽柑来遇见你》"] --> B["爱情故事"]
+    A --> C["女性成长"]
+    A --> D["历史背景"]
+    
+    B --> B1["青梅竹马"]
+    B --> B2["婚姻考验"]
+    B --> B3["相互扶持"]
+    
+    C --> C1["三代女性命运"]
+    C --> C2["女性意识觉醒"]
+    C --> C3["社会身份转变"]
+    
+    D --> D1["济州岛文化"]
+    D --> D2["1950-60年代韩国"]
+    D --> D3["海女传统"]
+    
+    style A fill:#E38B29,stroke:#333,stroke-width:2px
+    style B fill:#3A6B73,stroke:#333,stroke-width:1px,color:#fff
+    style C fill:#3A6B73,stroke:#333,stroke-width:1px,color:#fff
+    style D fill:#3A6B73,stroke:#333,stroke-width:1px,color:#fff
+                </pre>
+            </div>
+        </section>
+
+        <!-- Similar Recommendations -->
+        <section class="mb-20 opacity-0 animate-fadeInUp animation-delay-500">
+            <h2 class="text-4xl font-bold mb-8 border-b-2 border-primary pb-2 inline-block">相似推荐</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <div class="character-card">
+                    <img src="https://img9.doubanio.com/view/photo/l/public/p2272563445.webp" alt="请回答1988" class="w-full h-48 object-cover">
+                    <div class="p-3">
+                        <h4 class="font-bold">请回答1988</h4>
+                        <p class="text-xs mb-1">怀旧年代剧，精彩刻画家庭情感</p>
+                        <div class="star-rating text-xs">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="character-card">
+                    <img src="https://img9.doubanio.com/view/photo/l/public/p2445191695.webp" alt="小妇人" class="w-full h-48 object-cover">
+                    <div class="p-3">
+                        <h4 class="font-bold">小妇人</h4>
+                        <p class="text-xs mb-1">展现女性成长与家庭情感</p>
+                        <div class="star-rating text-xs">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="character-card">
+                    <img src="https://m.media-amazon.com/images/M/MV5BMjI0ODcxNzM1N15BMl5BanBnXkFtZTgwMzIwMTEwNDI@._V1_.jpg" alt="燃烧" class="w-full h-48 object-cover">
+                    <div class="p-3">
+                        <h4 class="font-bold">燃烧</h4>
+                        <p class="text-xs mb-1">韩国社会阶层与身份探索</p>
+                        <div class="star-rating text-xs">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="character-card">
+                    <img src="https://img1.doubanio.com/view/photo/l/public/p2561439800.webp" alt="寄生虫" class="w-full h-48 object-cover">
+                    <div class="p-3">
+                        <h4 class="font-bold">寄生虫</h4>
+                        <p class="text-xs mb-1">韩国社会阶层与家庭关系</p>
+                        <div class="star-rating text-xs">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="character-card">
+                    <img src="https://img2.doubanio.com/view/group_topic/l/public/p428519451.webp" alt="春夏秋冬又一春" class="w-full h-48 object-cover">
+                    <div class="p-3">
+                        <h4 class="font-bold">春夏秋冬又一春</h4>
+                        <p class="text-xs mb-1">韩国传统与自然美景展现</p>
+                        <div class="star-rating text-xs">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-10 border-t">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-4">《苦尽柑来遇见你》- 2025年3月7日 Netflix全球独家上线</p>
+            <div class="flex justify-center space-x-4">
+                <a href="#" class="hover:text-primary transition-colors"><i class="fab fa-netflix fa-lg"></i></a>
+                <a href="#" class="hover:text-primary transition-colors"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" class="hover:text-primary transition-colors"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" class="hover:text-primary transition-colors"><i class="fab fa-facebook fa-lg"></i></a>
+            </div>
+            <p class="mt-6 text-sm opacity-75">© 2025 Netflix. 本网页为非官方作品，仅供展示。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const body = document.body;
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle.querySelector('i');
+            
+            // Check system preference
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+            
+            // Toggle theme
+            themeToggle.addEventListener('click', function() {
+                if (body.classList.contains('light')) {
+                    body.classList.remove('light');
+                    body.classList.add('dark');
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                } else {
+                    body.classList.remove('dark');
+                    body.classList.add('light');
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                }
+                
+                // Update Mermaid theme
+                updateMermaidTheme();
+            });
+            
+            // Initialize Mermaid
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: body.classList.contains('dark') ? 'dark' : 'default',
+                securityLevel: 'loose',
+                themeVariables: {
+                    primaryColor: '#E38B29',
+                    primaryTextColor: body.classList.contains('dark') ? '#F5F5F5' : '#333333',
+                    primaryBorderColor: '#F1A661',
+                    lineColor: '#3A6B73',
+                    secondaryColor: '#3A6B73',
+                    tertiaryColor: body.classList.contains('dark') ? '#2A3B3F' : '#FDF6EC'
+                }
+            });
+            
+            function updateMermaidTheme() {
+                // Re-render mermaid diagrams with new theme
+                document.querySelectorAll('.mermaid').forEach(el => {
+                    const content = el.textContent;
+                    el.innerHTML = content;
+                });
+                
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: body.classList.contains('dark') ? 'dark' : 'default',
+                    securityLevel: 'loose',
+                    themeVariables: {
+                        primaryColor: '#E38B29',
+                        primaryTextColor: body.classList.contains('dark') ? '#F5F5F5' : '#333333',
+                        primaryBorderColor: '#F1A661',
+                        lineColor: '#3A6B73',
+                        secondaryColor: '#3A6B73',
+                        tertiaryColor: body.classList.contains('dark') ? '#2A3B3F' : '#FDF6EC'
+                    }
+                });
+                
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }
+            
+            // Intersection Observer for animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.animate-fadeInUp').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
